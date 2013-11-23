@@ -1,0 +1,3 @@
+class Sleep < Place
+
+end

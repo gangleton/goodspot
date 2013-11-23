@@ -1,0 +1,3 @@
+class Wifi < Place
+
+end

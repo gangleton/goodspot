@@ -1,0 +1,3 @@
+class Hang < Place
+
+end
