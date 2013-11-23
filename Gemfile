@@ -4,8 +4,11 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.1'
 
 gem 'thin'
-
 gem 'pg'
+
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
