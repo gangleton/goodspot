@@ -1,6 +1,6 @@
-Unnamed Communication Platform for Queer Youth
+goodspot
 ===========
 
-To be named in the future
+Communication platform for queer youth to find and share good spots.
 
-Part of the Hack for Queer Youth
+Created at the Hack for Queer Youth.
