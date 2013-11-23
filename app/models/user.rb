@@ -4,6 +4,20 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
 
+  ROLES = %w[author moderator admin]
+
+  before_create :set_role
+
+  def role?(base_role)
+    ROLES.index(base_role.to_s) <= ROLES.index(role)
+  end
+
+  def set_role
+    role = "author" if role.nil?
+  end
+
+
+
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
     unless user
