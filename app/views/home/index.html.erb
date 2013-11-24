@@ -1,5 +1,7 @@
-<% if current_user %>
-  <span class="button"><a href="/places">see spots</a></span>
-<% else %>
-  <span class="button"><%= link_to "Sign in with Facebook to start using goodspot", user_omniauth_authorize_path(:facebook) %></span>
-<% end %>
+<span class="button big">
+  <% if current_user %>
+    <a href="/places">see spots</a>
+  <% else %>
+    <%= link_to "Sign in with Facebook to start using goodspot", user_omniauth_authorize_path(:facebook) %>
+  <% end %>
+</span>
