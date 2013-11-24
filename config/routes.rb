@@ -7,6 +7,8 @@ Homotalk::Application.routes.draw do
 
   get "find" => 'places#find', :as => :find
 
+  post "text/incoming" => 'text#incoming'
+
   # You can have the root of your site routed with "root"
   root 'home#index'
 

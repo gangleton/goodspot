@@ -19,6 +19,10 @@ class User < ActiveRecord::Base
   end
 
   def verified?
+    verified
+  end
+
+  def verify!(code)
 
   end
 
