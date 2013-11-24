@@ -6,7 +6,6 @@ class TextController < ApplicationController
     phone = PhoneNumber.find_or_create_by(:number => params["From"])
     @user = phone.user
     @seq = phone.response_sequences.last
-    puts "THERE'S A SEQUENCE AT #{@seq}"
 
     message = params["Body"]
     response_text = ""
@@ -27,7 +26,6 @@ class TextController < ApplicationController
       else
         response_text = send_option_list
       end
-      @seq.outgoings << response_text
     else
       @seq.incomings << message
       last_outbound = @seq.outgoings.last
@@ -36,29 +34,42 @@ class TextController < ApplicationController
         response_text = ask_for_location
       when last_outbound.match(/Where are you/i)
         last_incoming = @seq.incomings.last
-        case
-        when last_incoming.match(/wifi/)
-          #find wifi spot
-        when last_incoming.match(/hang/)
-          #find hang spot
-        when last_incoming.match(/sleep/)
-          #find sleep spot
-        else
-          send_error_message
+        begin
+          coordinates = Geocoder.coordinates(message)
+          case
+          when last_incoming.match(/wifi/i)
+            #find wifi spot
+            places = Place.wifi.near(coordinates)
+            response_text = send_place_info(places)
+          when last_incoming.match(/hang/i)
+            #find hang spot
+            places = Place.hang.near(coordinates)
+            response_text = send_place_info(places)
+          when last_incoming.match(/sleep/i)
+            #find sleep spot
+            places = Place.sleep.near(coordinates)
+            response_text = send_place_info(places)
+          else
+            response_text = send_error_message
+          end
+        rescue StandardError => e
+          logger.info "Exception took place: #{e}"
+          response_text = send_error_message
         end
       when last_outbound.match(/You can hang/i)
         case message
-        when 'yes'
+        when 'y'
           send_directions
-        when 'no'
+        when 'n'
           #send thanks
+          response_text = "Something helpful here"
         else
           response_text = send_error_message
         end
       when last_outbound.match(/Do you have a verification code|Sorry, that code didn't work/i)
         #check for verification code here
-        if message.match(//)
-          response_text = "AWESOME"
+        if @user.verify!(message)
+          response_text = "Thanks! #{send_option_list}"
         else
           response_text = "Sorry, that code didn't work. Check spelling and capitalization and try again."
         end
@@ -67,6 +78,7 @@ class TextController < ApplicationController
       end
     end
 
+    @seq.outgoings << response_text
     @seq.outgoings_will_change!
     @seq.incomings_will_change!
     @seq.save
@@ -100,4 +112,11 @@ class TextController < ApplicationController
     'Sorry, we had a hard time figuring out what you were saying. Please try again'
   end
 
+  def send_place_info(places)
+    if places && !places.first.nil?
+      "You can hang here: #{places.first.name} at #{places.first.address}. Need directions? y/n"
+    else
+      send_error_message
+    end
+  end
 end

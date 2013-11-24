@@ -12,7 +12,7 @@ class Ability
       can :create, :all
       can :update, :all
     else
-      can :read, Place, :type => 'wifi'
+      can :read, Place, :category => 'Wifi'
     end
 
     #

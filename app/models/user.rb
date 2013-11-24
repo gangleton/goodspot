@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :phone_numbers
 
   ROLES = %w[author moderator admin]
+  VERIFICATION_CODE = "sflgbtcenter"
 
   before_create :set_role
 
@@ -23,7 +24,17 @@ class User < ActiveRecord::Base
   end
 
   def verify!(code)
-
+    if code == VERIFICATION_CODE
+      self.verified = true
+      self.role = 'author'
+      if self.save
+        true
+      else
+        false
+      end
+    else
+      false
+    end
   end
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
