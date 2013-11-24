@@ -62,8 +62,6 @@ a:focus {
   margin: 0 auto;
 }
 
-
-
 .main span.button {
   display: block;
   max-width: 23em;
@@ -86,6 +84,24 @@ a:focus {
   background: #29447e;
 }
 
+
+.notifications p {
+  margin: 0;
+  padding: 1em 0;
+  font-weight: bold;
+}
+
+.notifications .notice {
+  background-color: #dff0d8; /* green */
+}
+
+.notifications .alert {
+  background-color: #fcf8e3; /* yellow */
+}
+
+.notifications .error {
+  background-color: #f2dede; /* red */
+}
 
 /* ========================================================
     FOOTER
