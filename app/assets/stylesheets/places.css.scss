@@ -21,8 +21,45 @@ body { margin:0; padding:0; }
 }
 
 .masthead .controls h3,
-.masthead .controls select {
+.masthead .controls ul {
   display: inline-block;
+  margin: 0;
+  padding: 0;
+  line-height: 52px;
+  vertical-align: middle;
+}
+
+.masthead .controls .categories {
+  list-style: none;
+  height: 52px;
+}
+
+.masthead .controls .categories li {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+
+.masthead .controls .categories li a {
+  display: block;
+  width: 52px;
+  height: 52px;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  background-size: 52px 52px;
+}
+
+.masthead .controls .categories li a.category-wifi {
+  background-image: url('/assets/wifi.png');
+}
+
+.masthead .controls .categories li a.category-hang {
+  background-image: url('/assets/hang.png');
+}
+
+.masthead .controls .categories li a.category-sleep {
+  background-image: url('/assets/sleep.png');
 }
 
 .listings {
