@@ -18,8 +18,9 @@ class TextController < ApplicationController
 
     if @seq.new_record?
       if @user.nil?
-        @user = phone.create_user
-        @user.save
+        @user = phone.create_user( :email => "placeholder@example.com", :password => "password", :password_confirmation => "password" )
+        @user.save!
+        phone.save
         response_text = ask_for_verification
       elsif @user && !@user.verified?
         response_text = ask_for_verification
@@ -33,33 +34,29 @@ class TextController < ApplicationController
       when last_outbound.match(/What are you looking for/i)
         response_text = ask_for_location
       when last_outbound.match(/Where are you/i)
-        last_incoming = @seq.incomings.last
-        begin
-          coordinates = Geocoder.coordinates(message)
+        incomings = @seq.incomings
+          normalized_message = Place.localize(message)
+          puts normalized_message
+          coordinates = Geocoder.coordinates(normalized_message)
           case
-          when last_incoming.match(/wifi/i)
+          when incomings.any?{ |i| i.match(/wifi/i) }
             #find wifi spot
             places = Place.wifi.near(coordinates)
             response_text = send_place_info(places)
-          when last_incoming.match(/hang/i)
+          when incomings.any?{ |i| i.match(/hang/i) }
             #find hang spot
             places = Place.hang.near(coordinates)
             response_text = send_place_info(places)
-          when last_incoming.match(/sleep/i)
+          when incomings.any?{ |i| i.match(/sleep/i) }
             #find sleep spot
             places = Place.sleep.near(coordinates)
             response_text = send_place_info(places)
           else
             response_text = send_error_message
           end
-        rescue StandardError => e
-          logger.info "Exception took place: #{e}"
-          response_text = send_error_message
-        end
       when last_outbound.match(/You can hang/i)
         if message.match(/y/i)
           response_text = send_option_list
-          send_directions
         elsif message.match(/n/i)
           #send thanks
           response_text = "Something helpful here"
@@ -78,7 +75,9 @@ class TextController < ApplicationController
       end
     end
 
-    @seq.outgoings << response_text
+    unless response_text == send_error_message
+      @seq.outgoings << response_text
+    end
     @seq.outgoings_will_change!
     @seq.incomings_will_change!
     @seq.save
