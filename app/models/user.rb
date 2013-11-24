@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   end
 
   def verify!(code)
-    if code == VERIFICATION_CODE
+    if code.downcase == VERIFICATION_CODE
       self.verified = true
       self.role = 'author'
       if self.save
