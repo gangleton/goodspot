@@ -15,7 +15,12 @@
 
 <div id="map"></div>
 <script>
-var map = L.mapbox.map('map', 'unruthless.gc5l92e0');
+  var map = L.mapbox.map('map', 'unruthless.gc5l92e0');
+  var places = JSON.parse('<%= j @places.to_json.html_safe %>');
+  for(var i = 0; i < places.length; i++){
+    p = places[i].place;
+    L.marker([ p.latitude, p.longitude]).addTo(map);
+  }
 </script>
 
 <table class="listings" cellspacing="0">
