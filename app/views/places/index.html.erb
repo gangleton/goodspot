@@ -1,11 +1,24 @@
-<h1>See All Spots</h1>
+<div class="masthead">
+  <h1 class="page-title">See All Spots</h1>
+  <div class="controls">
+    <h3>Show good spots for:</h3>
+    <select>
+        <option>wifi</option>
+        <option>hang</option>
+        <option>sleep</option>
+    </select>
+  </div>
+  <div class="add">
+    <h3><span class="button"><%= link_to 'Add a spot', new_place_path %></span></h3>
+  </div>
+</div>
 
-<div id='map'></div>
+<div id="map"></div>
 <script>
 var map = L.mapbox.map('map', 'unruthless.gc5l92e0');
 </script>
 
-<table>
+<table class="listings" cellspacing="0">
   <thead>
     <tr>
       <th>Name</th>
@@ -31,14 +44,11 @@ var map = L.mapbox.map('map', 'unruthless.gc5l92e0');
         <td><%= place.latitude %></td>
         <td><%= place.longitude %></td>
         <td><%= place.category %></td>
-        <td><%= link_to 'Show', place %></td>
-        <td><%= link_to 'Edit', edit_place_path(place) %></td>
-        <td><%= link_to 'Destroy', place, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><span class="button"><%= link_to 'Show', place %></span></td>
+        <td><span class="button"><%= link_to 'Edit', edit_place_path(place) %></span></td>
+        <td><span class="button"><%= link_to 'Delete', place, method: :delete, data: { confirm: 'Are you sure?' } %></span></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Place', new_place_path %>

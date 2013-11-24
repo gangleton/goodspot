@@ -61,6 +61,7 @@ a:focus {
 
 .header .user {
   position: fixed;
+  z-index: 1000000;
   right: 0;
   top: 0;
   height: 2em;
@@ -96,11 +97,15 @@ a:focus {
   display: block;
   padding: 0.5em;
   color: #FFF;
-  font-size: 150%;
   text-align: center;
   border-radius: 0.5em;
   border: 1px solid #29447e;
   background: #5b74a8;
+  margin: 0 0.5em;
+}
+
+.main span.button.big a {
+  font-size: 150%;
   line-height: 1.2;
 }
 
