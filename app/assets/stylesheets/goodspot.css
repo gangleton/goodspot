@@ -9,8 +9,13 @@ h1, h2, h3, h4, h5, h6 {
 
 
 .page {
-  margin: 0 auto;
-  max-width: 90em;
+  height: 100%;
+  left: 0;
+  min-height: 6em; /* equal to header height + footer height */
+  min-width: 20em; /* equal to mobile nav width */
+  position: absolute;
+  top: 0;
+  width: 100%;
 }
 
 a:link,
@@ -30,6 +35,8 @@ a:focus {
    ======================================================== */
 
 .header {
+  max-width: 90em;
+  margin: 0 auto;
 }
 
 .header .logo {
@@ -39,6 +46,7 @@ a:focus {
   text-indent: 100%;
   white-space: nowrap;
   overflow: hidden;
+  margin: 0 auto;
 }
 
 .header .user {
@@ -50,24 +58,42 @@ a:focus {
    ======================================================== */
 
 .main {
+  max-width: 90em;
+  margin: 0 auto;
 }
+
+
 
 .main span.button {
   display: block;
-  border-radius: 0.5em;
-  border: 1px solid #000;
-  background: #333;
+  max-width: 23em;
+  margin: 0 auto;
 }
 
 .main span.button a {
   display: block;
   padding: 0.5em;
+  color: #FFF;
+  font-size: 150%;
+  text-align: center;
+  border-radius: 0.5em;
+  border: 1px solid #29447e;
+  background: #5b74a8;
+  line-height: 1.2;
 }
+
+.main span.button a:hover {
+  background: #29447e;
+}
+
 
 /* ========================================================
     FOOTER
    ======================================================== */
 
 .footer {
-  background: #000;
+  height: 3em;
+  overflow: hidden;
+  position: static;
+  text-align: center;
 }
