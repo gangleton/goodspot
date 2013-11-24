@@ -57,10 +57,10 @@ class TextController < ApplicationController
           response_text = send_error_message
         end
       when last_outbound.match(/You can hang/i)
-        case message
-        when 'y'
+        if message.match(/y/i)
+          response_text = send_option_list
           send_directions
-        when 'n'
+        elsif message.match(/n/i)
           #send thanks
           response_text = "Something helpful here"
         else
@@ -114,7 +114,7 @@ class TextController < ApplicationController
 
   def send_place_info(places)
     if places && !places.first.nil?
-      "You can hang here: #{places.first.name} at #{places.first.address}. Need directions? y/n"
+      "You can hang here: #{places.first.name} at #{places.first.address}. Looking for a different place?"
     else
       send_error_message
     end
