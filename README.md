@@ -5,9 +5,6 @@ Communication platform for queer youth to find and share good spots.
 
 Created at the Hack for Queer Youth.
 
-
-
-
 ==============
 SCENARIO A
 I am a youth walking in the Mission and I want to find a place to hang out for a few hours where I won't be hassled. I don't have a smartphone, but I do have a texting plan.
@@ -65,5 +62,6 @@ CHECK PHONE:
 5a. If they haven't yet provided a phone number, "Put in your phone number to use goodspot via text later."
 5b. If they've provided a phone number, "Check this number - is it still correct?"
 
-6. See main view. Has a map with all spots on it.
-
+6. See main view. Has a map with all spots on it, plus filter controls, plus geolocate button, plus 'share a spot.'
+7. I click on Share A Spot.
+8. I fill out the form and submit.
