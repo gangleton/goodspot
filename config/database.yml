@@ -18,5 +18,5 @@ test:
   database: homotalk_test
 
 production:
-  <<: *development
+  adapter: postgresql
   database: homotalk_production

@@ -6,6 +6,8 @@ gem 'rails', '4.0.1'
 gem 'thin'
 gem 'pg'
 
+gem 'rails_12factor', group: :production
+
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
