@@ -2,6 +2,7 @@ Homotalk::Application.routes.draw do
   resources :places
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  post "users/verify" => 'users#verify'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
