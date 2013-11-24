@@ -1,1 +1,19 @@
 <h1>Find A Spot</h1>
+
+<%= form_tag("/find", method: "get") do %>
+
+  <%= # What? %>
+  <%= label_tag(:type, "I&rsquo;m looking for") %>
+  <%= text_field_tag(:type) %>
+
+  <%= # Where? %>
+  <%= label_tag(:location, "Near") %>
+  <%= text_field_tag(:location) %>
+  or <button>me</button>
+
+  <%= # When? %>
+  <%= select_tag(:hours, options_for_select([['now', 'now'], ['today', 'today'], ['tonight','tonight'],['whenever','whenever']])) %>
+
+  <%= submit_tag %>
+
+<% end %>

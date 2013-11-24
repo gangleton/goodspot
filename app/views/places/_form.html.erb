@@ -36,8 +36,8 @@
     <%= f.text_field :longitude %>
   </div>
   <div class="field">
-    <%= f.label :type %><br>
-    <%= f.text_field :type %>
+    <%= f.label :category %><br>
+    <%= f.select(:category, [['wifi','Wifi'],['hang','Hang'],['sleep','Sleep']]) %>
   </div>
   <div class="actions">
     <%= f.submit %>

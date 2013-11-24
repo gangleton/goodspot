@@ -1,5 +1,10 @@
 <h1>See All Spots</h1>
 
+<div id='map'></div>
+<script>
+var map = L.mapbox.map('map', 'unruthless.gc5l92e0');
+</script>
+
 <table>
   <thead>
     <tr>
@@ -9,7 +14,7 @@
       <th>Address</th>
       <th>Latitude</th>
       <th>Longitude</th>
-      <th>Type</th>
+      <th>Category</th>
       <th></th>
       <th></th>
       <th></th>
@@ -25,7 +30,7 @@
         <td><%= place.address %></td>
         <td><%= place.latitude %></td>
         <td><%= place.longitude %></td>
-        <td><%= place.type %></td>
+        <td><%= place.category %></td>
         <td><%= link_to 'Show', place %></td>
         <td><%= link_to 'Edit', edit_place_path(place) %></td>
         <td><%= link_to 'Destroy', place, method: :delete, data: { confirm: 'Are you sure?' } %></td>
