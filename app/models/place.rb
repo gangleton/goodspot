@@ -6,4 +6,10 @@ class Place < ActiveRecord::Base
   geocoded_by :address
   before_save :geocode
 
+  def self.localize(text_location)
+    unless text_location.match(/SF|San Francisco/)
+      text_location.concat(", San Francisco")
+    end
+    return text_location
+  end
 end
