@@ -1,3 +1,8 @@
+html,
+body {
+  height: 100%;
+}
+
 body {
   background: #EEE;
   font-family: sans-serif;
@@ -9,13 +14,18 @@ h1, h2, h3, h4, h5, h6 {
 
 
 .page {
-  height: 100%;
+  min-height: 100%;
   left: 0;
-  min-height: 6em; /* equal to header height + footer height */
+  min-height: 3em; /* equal to header height + footer height */
   min-width: 20em; /* equal to mobile nav width */
-  position: absolute;
-  top: 0;
   width: 100%;
+  margin-bottom: 3em;
+}
+
+.page:after {
+  content: "";
+  display: block;
+  height: 3em;
 }
 
 a:link,
@@ -50,7 +60,18 @@ a:focus {
 }
 
 .header .user {
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 2em;
+  background: #000;
+  color: #FFF;
+  border-bottom-left-radius: 0.5em;
+  padding: 0.25em 1em;
+}
 
+.header .user a {
+  color: #FFF;
 }
 
 /* ========================================================
@@ -60,6 +81,9 @@ a:focus {
 .main {
   max-width: 90em;
   margin: 0 auto;
+  padding-bottom: 3em;
+  position: relative;
+  height: 100%;
 }
 
 .main span.button {
@@ -83,7 +107,6 @@ a:focus {
 .main span.button a:hover {
   background: #29447e;
 }
-
 
 .notifications p {
   margin: 0;
