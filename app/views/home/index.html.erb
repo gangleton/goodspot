@@ -1,5 +1,3 @@
 <h1>Welcome</h1>
 
-<p><a href="#">Log In With Facebook</a></p>
-
-<p><a href="/places">Proceed as Guest</a></p>
+<%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
