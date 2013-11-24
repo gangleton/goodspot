@@ -15,7 +15,7 @@
     <div class="page">
       <div class="header">
         <div class="logo">goodspot</div>
-        <div class="user"><% if current_user %>Logged in as <%= current_user.name %> | <a href="#">Log out</a><% end %></div>
+        <div class="user"><% if current_user %>Logged in as <%= current_user.name %> | <%= link_to "Log out", destroy_user_session_path, :method => :delete %><% end %></div>
       </div>
       <div class="main">
         <div class="notifications">
