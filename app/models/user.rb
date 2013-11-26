@@ -6,10 +6,18 @@ class User < ActiveRecord::Base
 
   has_many :phone_numbers
 
-  ROLES = %w[author moderator admin]
+  ROLES = %w[texter author moderator admin]
   VERIFICATION_CODE = "sflgbtcenter"
 
   before_create :set_role
+
+  def email_required?
+    super && role != "texter"
+  end
+
+  def password_required?
+    super && role != "texter"
+  end
 
   def role?(base_role)
     ROLES.index(base_role.to_s) <= ROLES.index(role)

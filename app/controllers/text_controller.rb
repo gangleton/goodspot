@@ -18,7 +18,7 @@ class TextController < ApplicationController
 
     if @seq.new_record?
       if @user.nil?
-        @user = phone.create_user( :email => "placeholder@example.com", :password => "password", :password_confirmation => "password" )
+        @user = phone.create_user( :role => "texter" )
         @user.save!
         phone.save
         response_text = ask_for_verification
