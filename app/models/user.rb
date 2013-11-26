@@ -12,11 +12,11 @@ class User < ActiveRecord::Base
   before_create :set_role
 
   def email_required?
-    super && role != "texter"
+    false
   end
 
   def password_required?
-    super && role != "texter"
+    false
   end
 
   def role?(base_role)
