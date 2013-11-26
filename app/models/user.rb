@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
+         :recoverable, :rememberable, :trackable, :omniauthable, :omniauth_providers => [:facebook]
 
   has_many :phone_numbers
 
@@ -10,14 +10,6 @@ class User < ActiveRecord::Base
   VERIFICATION_CODE = "sflgbtcenter"
 
   before_create :set_role
-
-  def email_required?
-    false
-  end
-
-  def password_required?
-    false
-  end
 
   def role?(base_role)
     ROLES.index(base_role.to_s) <= ROLES.index(role)
